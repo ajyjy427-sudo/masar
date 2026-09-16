@@ -284,6 +284,10 @@ app.use((err, req, res, next) => {
   res.status(500).json({ success: false, error: "حدث خطأ غير متوقع بالسيرفر." });
 });
 
-app.listen(PORT, () => {
-  console.log(`✅ السيرفر شغال على http://localhost:${PORT}`);
-});
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(PORT, () => {
+    console.log(`🚀 السيرفر شغال على http://localhost:${PORT}`);
+  });
+}
+
+module.exports = app;
