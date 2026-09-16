@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>مسار | منصتك الدراسية الذكية</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700;800&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ============ شاشة الاستقبال ============ -->
+  <div id="landingScreen">
+    <div class="hero-orbs">
+      <span class="orb orb-1"></span>
+      <span class="orb orb-2"></span>
+      <span class="orb orb-3"></span>
+    </div>
+
+    <div class="landing-content">
+      <div class="landing-logo">
+        <span class="landing-logo-mark">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2L4 21L12 16.5L20 21L12 2Z" stroke="white" stroke-width="1.6" stroke-linejoin="round"/>
+          </svg>
+        </span>
+      </div>
+      <h1 class="landing-title">مرحباً بك في مسار</h1>
+      <p class="landing-tagline">رحلتك الأكاديمية نحو التميز تبدأ من هنا — كل أدواتك الذكية بمكان واحد</p>
+
+      <div class="landing-cta-row">
+        <button class="landing-cta-primary" id="landingStartBtn">ابدأ الآن</button>
+        <button class="landing-cta-secondary" id="landingExploreBtn">استكشف الأدوات</button>
+      </div>
+
+      <div class="landing-features">
+        <div class="landing-feature">
+          <span class="feature-icon">📅</span>
+          <span>فك جدولك تلقائياً</span>
+        </div>
+        <div class="landing-feature">
+          <span class="feature-icon">📊</span>
+          <span>تابع معدلك لحظياً</span>
+        </div>
+        <div class="landing-feature">
+          <span class="feature-icon">🎯</span>
+          <span>خطط لمسارك المهني</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="app">
+
+    <!-- ============ الشريط الجانبي ============ -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-logo">
+        <span class="logo-mark">م</span>
+        <span class="logo-text">مسار</span>
+      </div>
+
+      <nav class="sidebar-nav">
+        <button class="nav-item active" data-target="dashboard">
+          <span class="nav-icon">⌂</span>
+          <span class="nav-label">الرئيسية</span>
+        </button>
+        <button class="nav-item" data-target="schedule">
+          <span class="nav-icon">🗓</span>
+          <span class="nav-label">فك الجدول الذكي</span>
+        </button>
+        <button class="nav-item" data-target="gpa">
+          <span class="nav-icon">📊</span>
+          <span class="nav-label">حاسبة المعدل</span>
+        </button>
+        <button class="nav-item" data-target="absence">
+          <span class="nav-icon">⏱</span>
+          <span class="nav-label">عداد الحرمان</span>
+        </button>
+        <button class="nav-item" data-target="study">
+          <span class="nav-icon">📝</span>
+          <span class="nav-label">المذاكرة الذكية</span>
+        </button>
+        <button class="nav-item" data-target="skills">
+          <span class="nav-icon">🎯</span>
+          <span class="nav-label">خريطة المهارات</span>
+        </button>
+        <button class="nav-item" data-target="graduation">
+          <span class="nav-icon">🎓</span>
+          <span class="nav-label">جاهزية التخرج</span>
+        </button>
+        <button class="nav-item" data-target="assistant">
+          <span class="nav-icon">✦</span>
+          <span class="nav-label">مساعد مسار الذكي</span>
+        </button>
+        <button class="nav-item" data-target="contacts">
+          <span class="nav-icon">📇</span>
+          <span class="nav-label">جهات الاتصال</span>
+        </button>
+      </nav>
+    </aside>
+
+    <div class="main-wrapper">
+
+      <header class="topbar">
+        <button class="sidebar-toggle" id="sidebarToggle" aria-label="فتح القائمة">☰</button>
+        <h1 class="page-title" id="pageTitle">الرئيسية</h1>
+        <div class="topbar-user" id="topbarUser">
+          <button class="btn-secondary" id="loginBtn">تسجيل الدخول بـ Google</button>
+        </div>
+      </header>
+
+      <main class="content" id="content">
+
+        <!-- ---------- 0. لوحة الرئيسية ---------- -->
+        <section class="page active" id="dashboard">
+          <div class="dashboard-layout">
+            <div class="hero-card">
+              <div class="hero-card-copy">
+                <span class="hero-kicker">منصتك الدراسية</span>
+                <h2>أهلاً بك في مسار</h2>
+                <p>نظرة واحدة على معدلك، حضورك، مهامك، وساعات التخرج — وكل الأدوات تحتها مباشرة.</p>
+              </div>
+              <div class="hero-card-actions">
+                <button class="hero-action-btn" type="button" data-target="schedule">رفع الجدول</button>
+                <button class="hero-action-btn hero-action-ghost" type="button" data-target="assistant">اسأل المساعد</button>
+              </div>
+            </div>
+
+            <section class="dashboard-section">
+              <div class="section-heading">
+                <h3>نظرة سريعة</h3>
+                <p>الأرقام تتحدث من بياناتك المحفوظة في المتصفح</p>
+              </div>
+              <div class="stats-grid" id="statsGrid"></div>
+            </section>
+
+            <section class="dashboard-section">
+              <div class="section-heading">
+                <h3>الأدوات</h3>
+                <p>ابدأ من هنا بدل التنقل الطويل في القائمة</p>
+              </div>
+              <div class="quick-links-grid" id="quickLinksGrid"></div>
+            </section>
+          </div>
+        </section>
+
+        <!-- ---------- 1. فك الجدول الذكي ---------- -->
+        <section class="page" id="schedule">
+          <div class="section-container" id="scheduleContainer">
+
+            <div class="upload-zone" id="uploadZone">
+              <input type="file" id="scheduleImageInput" accept="image/*" hidden>
+              <div class="upload-placeholder" id="uploadPlaceholder">
+                <span class="upload-icon">🖼</span>
+                <p class="upload-title">ارفع صورة جدولك الدراسي</p>
+                <p class="upload-hint">اسحب الصورة هنا أو اضغط للاختيار (JPG / PNG)</p>
+                <button class="btn-primary" id="chooseImageBtn" type="button">اختيار صورة</button>
+              </div>
+
+              <div class="upload-preview" id="uploadPreview" hidden>
+                <img id="previewImg" alt="معاينة صورة الجدول">
+                <div class="upload-preview-actions">
+                  <button class="btn-primary" id="analyzeBtn" type="button">تحليل الجدول</button>
+                  <button class="btn-secondary" id="removeImageBtn" type="button">إزالة الصورة</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="analyze-status" id="analyzeStatus" hidden>
+              <span class="loader"></span>
+              <span>جاري تحليل الجدول...</span>
+            </div>
+
+            <div class="schedule-results" id="scheduleResults" hidden>
+              <h3>الجدول المستخرج</h3>
+              <table class="schedule-table">
+                <thead>
+                  <tr>
+                    <th>المادة</th>
+                    <th>اليوم</th>
+                    <th>الوقت</th>
+                    <th>النوع</th>
+                  </tr>
+                </thead>
+                <tbody id="scheduleTableBody"></tbody>
+              </table>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- ---------- 2. حاسبة المعدل + ماذا لو ---------- -->
+        <section class="page" id="gpa">
+          <div class="section-container" id="gpaContainer">
+
+            <div class="gpa-settings">
+              <label for="gpaScale">نظام المعدل:</label>
+              <select id="gpaScale">
+                <option value="5">من 5</option>
+                <option value="4">من 4</option>
+              </select>
+            </div>
+
+            <table class="gpa-table" id="gpaTable">
+              <thead>
+                <tr>
+                  <th>اسم المادة</th>
+                  <th>عدد الساعات</th>
+                  <th>الدرجة</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody id="gpaTableBody"></tbody>
+            </table>
+
+            <button class="btn-secondary" id="addCourseBtn" type="button">+ إضافة مادة</button>
+
+            <div class="gpa-summary">
+              <div class="gpa-summary-card">
+                <span class="gpa-summary-label">المعدل التراكمي</span>
+                <span class="gpa-summary-value" id="gpaResult">0.00</span>
+              </div>
+              <div class="gpa-summary-card">
+                <span class="gpa-summary-label">إجمالي الساعات</span>
+                <span class="gpa-summary-value" id="totalHoursResult">0</span>
+              </div>
+            </div>
+
+            <hr class="gpa-divider">
+
+            <div class="whatif-section">
+              <h3>محاكاة "ماذا لو" 🔮</h3>
+              <p class="whatif-hint">جرّب إضافة مواد افتراضية وشوف تأثيرها على معدلك قبل ما تسجلها فعلياً.</p>
+
+              <table class="gpa-table" id="whatifTable">
+                <thead>
+                  <tr>
+                    <th>اسم المادة (افتراضي)</th>
+                    <th>عدد الساعات</th>
+                    <th>الدرجة المتوقعة</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody id="whatifTableBody"></tbody>
+              </table>
+
+              <button class="btn-secondary" id="addWhatifBtn" type="button">+ إضافة مادة افتراضية</button>
+
+              <div class="gpa-summary">
+                <div class="gpa-summary-card whatif-card">
+                  <span class="gpa-summary-label">المعدل المتوقع بعد الإضافة</span>
+                  <span class="gpa-summary-value" id="whatifResult">0.00</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- ---------- 3. عداد الحرمان ---------- -->
+        <section class="page" id="absence">
+          <div class="section-container" id="absenceContainer">
+
+            <div class="absence-intro">
+              <p>أضف موادك، وحدد نسبة الحرمان المسموحة (الافتراضي 25%)، ورح يطلع لك مؤشر واضح لكل مادة.</p>
+            </div>
+
+            <table class="absence-table" id="absenceTable">
+              <thead>
+                <tr>
+                  <th>اسم المادة</th>
+                  <th>عدد الجلسات الكلي</th>
+                  <th>عدد مرات الغياب</th>
+                  <th>نسبة الحرمان المسموحة %</th>
+                  <th>الحالة</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody id="absenceTableBody"></tbody>
+            </table>
+
+            <button class="btn-secondary" id="addAbsenceRowBtn" type="button">+ إضافة مادة</button>
+
+            <div class="absence-legend">
+              <span class="legend-item">
+                <span class="legend-dot dot-green"></span> بأمان — لسه فيه مجال غياب
+              </span>
+              <span class="legend-item">
+                <span class="legend-dot dot-yellow"></span> اقتربت من الحد
+              </span>
+              <span class="legend-item">
+                <span class="legend-dot dot-red"></span> تجاوزت / على حافة الحرمان
+              </span>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- ---------- 4. نظام المذاكرة الذكية ---------- -->
+        <section class="page" id="study">
+          <div class="section-container" id="studyContainer">
+
+            <div class="task-form">
+              <input type="text" id="taskTitleInput" placeholder="اسم المهمة (مثال: بحث مادة قواعد البيانات)">
+              <input type="text" id="taskSubjectInput" placeholder="المادة">
+              <select id="calendarType">
+                <option value="gregorian">📅 ميلادي</option>
+                <option value="hijri">🌙 هجري</option>
+              </select>
+              <input type="date" id="taskDueInputGregorian">
+              <div class="hijri-inputs" id="hijriInputsWrap" hidden>
+                <input type="number" id="hijriDay" placeholder="يوم" min="1" max="30">
+                <input type="number" id="hijriMonth" placeholder="شهر" min="1" max="12">
+                <input type="number" id="hijriYear" placeholder="سنة" min="1400" max="1500">
+              </div>
+              <button class="btn-primary" id="addTaskBtn" type="button">+ إضافة مهمة</button>
+            </div>
+
+            <div class="task-filters">
+              <button class="filter-chip active" data-filter="all">الكل</button>
+              <button class="filter-chip" data-filter="upcoming">قريبة</button>
+              <button class="filter-chip" data-filter="overdue">متأخرة</button>
+              <button class="filter-chip" data-filter="done">منجزة</button>
+            </div>
+
+            <div class="task-list" id="taskList">
+              <p class="empty-state" id="taskEmptyState">لا توجد مهام حالياً — أضف أول مهمة من الأعلى.</p>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- ---------- 5. خريطة المهارات والمسار المهني ---------- -->
+        <section class="page" id="skills">
+          <div class="section-container" id="skillsContainer">
+
+            <div class="skills-intro">
+              <p>اختر مسارك المهني المستهدف، وشوف المهارات المطلوبة، والشهادات المقترحة، ومشاريع تقدر تبنيها لتقوية بروفايلك.</p>
+            </div>
+
+            <div class="career-selector">
+              <label for="careerSelect">المسار الوظيفي المستهدف:</label>
+              <select id="careerSelect">
+                <option value="">اختر مساراً...</option>
+              </select>
+            </div>
+
+            <div class="career-detail" id="careerDetail" hidden>
+              <div class="career-header">
+                <h3 id="careerTitle"></h3>
+                <p id="careerDescription"></p>
+              </div>
+
+              <div class="career-grid">
+                <div class="career-block">
+                  <h4>🧩 المهارات المطلوبة</h4>
+                  <div class="tag-list" id="careerSkills"></div>
+                </div>
+                <div class="career-block">
+                  <h4>🎓 الشهادات المقترحة</h4>
+                  <ul class="simple-list" id="careerCerts"></ul>
+                </div>
+                <div class="career-block">
+                  <h4>🛠 مشاريع مقترحة</h4>
+                  <ul class="simple-list" id="careerProjects"></ul>
+                </div>
+                <div class="career-block">
+                  <h4>📘 المواد المرتبطة بمنهجك</h4>
+                  <ul class="simple-list" id="careerCourses"></ul>
+                </div>
+              </div>
+            </div>
+
+            <p class="empty-state" id="skillsEmptyState">اختر مساراً وظيفياً من القائمة أعلاه لعرض التفاصيل.</p>
+
+          </div>
+        </section>
+
+        <!-- ---------- 6. درجة الجاهزية للتخرج ---------- -->
+        <section class="page" id="graduation">
+          <div class="section-container" id="graduationContainer">
+
+            <div class="grad-settings">
+              <div class="grad-input-group">
+                <label for="totalPlanHours">إجمالي ساعات الخطة الدراسية</label>
+                <input type="number" id="totalPlanHours" placeholder="مثال: 132">
+              </div>
+              <div class="grad-input-group">
+                <label for="completedHours">الساعات المُنجزة لحد الآن</label>
+                <input type="number" id="completedHours" placeholder="مثال: 78">
+              </div>
+              <button class="btn-primary" id="calcGradBtn" type="button">احسب الجاهزية</button>
+            </div>
+
+            <div class="grad-result" id="gradResult" hidden>
+              <div class="grad-progress-wrap">
+                <div class="grad-circle" id="gradCircle">
+                  <span class="grad-percent" id="gradPercent">0%</span>
+                </div>
+                <p class="grad-status-text" id="gradStatusText"></p>
+              </div>
+
+              <div class="grad-stats-grid">
+                <div class="grad-stat-card">
+                  <span class="grad-stat-label">الساعات المنجزة</span>
+                  <span class="grad-stat-value" id="gradCompletedVal">0</span>
+                </div>
+                <div class="grad-stat-card">
+                  <span class="grad-stat-label">الساعات المتبقية</span>
+                  <span class="grad-stat-value" id="gradRemainingVal">0</span>
+                </div>
+                <div class="grad-stat-card">
+                  <span class="grad-stat-label">إجمالي الخطة</span>
+                  <span class="grad-stat-value" id="gradTotalVal">0</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- ---------- 7. مساعد الذكاء الاصطناعي ---------- -->
+        <section class="page" id="assistant">
+          <div class="section-container" id="assistantContainer">
+
+            <div class="chat-window" id="chatWindow">
+              <div class="chat-messages" id="chatMessages">
+                <div class="chat-bubble bot">
+                  <p>أهلاً 👋 أنا مساعد مسار. أقدر أساعدك بأسئلة عن جدولك، معدلك، مذاكرتك، أو مسارك المهني. جرب اسألني أي شي!</p>
+                </div>
+              </div>
+
+              <div class="chat-suggestions" id="chatSuggestions">
+                <button class="suggestion-chip" type="button">كيف أحسب معدلي؟</button>
+                <button class="suggestion-chip" type="button">كم باقي على الحرمان بمادة معينة؟</button>
+                <button class="suggestion-chip" type="button">اقترح لي خطة مذاكرة هالأسبوع</button>
+              </div>
+
+              <form class="chat-input-bar" id="chatInputForm">
+                <input type="text" id="chatInput" placeholder="اكتب سؤالك هنا..." autocomplete="off">
+                <button class="btn-primary" type="submit">إرسال</button>
+              </form>
+            </div>
+
+          </div>
+        </section>
+        <!-- ---------- 8. جهات الاتصال ---------- -->
+        <section class="page" id="contacts">
+          <div class="section-container" id="contactsContainer">
+            <div class="contact-form">
+              <input type="text" id="contactNameInput" placeholder="الاسم">
+              <input type="text" id="contactSubjectInput" placeholder="وسيلة التواصل (تيليجرام / تيمز / بريد)">
+              <input type="text" id="contactEmailInput" placeholder="الحساب / البريد">
+              <button class="btn-primary" id="addContactBtn" type="button">+ إضافة</button>
+            </div>
+
+            <div class="contact-list" id="contactList">
+              <p class="empty-state" id="contactEmptyState">لا توجد جهات اتصال محفوظة — أضف أول جهة من الأعلى.</p>
+            </div>
+
+          </div>
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+  <script src="storage.js" defer></script>
+  <script src="decode.js" defer></script>
+  <script src="gpa.js" defer></script>
+  <script src="absence.js" defer></script>
+  <script src="study.js" defer></script>
+  <script src="skills.js" defer></script>
+  <script src="graduation.js" defer></script>
+  <script src="assistant.js" defer></script>
+  <script src="auth.js" defer></script>
+  <script src="contacts.js" defer></script>
+  <script src="app.js" defer></script>
+</body>
+</html>
