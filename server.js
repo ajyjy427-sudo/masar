@@ -54,18 +54,19 @@ const passport = require("passport");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const session = require("express-session");
 
+app.set("trust proxy", 1);
+
 app.use(
   session({
-    secret: process.env.SESSION_SECRET,
+    secret: process.env.SESSION_SECRET || "masar_secret_key_123",
     resave: false,
     saveUninitialized: false,
     cookie: {
       secure: process.env.NODE_ENV === "production",
-      maxAge: 7 * 24 * 60 * 60 * 1000, // الجلسة تبقى أسبوع
+      maxAge: 7 * 24 * 60 * 60 * 1000, // تبقى أسبوع
     },
   })
 );
-
 app.use(passport.initialize());
 app.use(passport.session());
 
