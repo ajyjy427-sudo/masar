@@ -12,7 +12,7 @@ const cors = require("cors");
 const rateLimit = require("express-rate-limit");
 const mongoose = require("mongoose");
 const { GoogleGenerativeAI } = require("@google/generative-ai");
-const UserData = require("./models/UserData");
+const UserData =require('./models/userData')
 
 const app = express();
 // المنصات السحابية (Render/Railway/...) تحدد المنفذ عبر متغير بيئة PORT
