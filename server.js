@@ -44,6 +44,22 @@ const aiRateLimiter = rateLimit({
 });
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+// دالة تحاول تنفذ طلب Gemini عدة مرات لو صار ضغط مؤقت (503)
+async function generateWithRetry(model, input, maxRetries = 3) {
+  for (let attempt = 1; attempt <= maxRetries; attempt++) {
+    try {
+      return await model.generateContent(input);
+    } catch (error) {
+      const isOverloaded = error.message && error.message.includes("503");
+      if (isOverloaded && attempt < maxRetries) {
+        const waitTime = attempt * 1500;
+        await new Promise((resolve) => setTimeout(resolve, waitTime));
+        continue;
+      }
+      throw error;
+    }
+  }
+}
 // ============================================
 // إعداد تسجيل الدخول بـ Google
 // ============================================
@@ -62,7 +78,7 @@ app.use(
     saveUninitialized: false,
     store: MongoStore.create({
       mongoUrl: process.env.MONGODB_URI,
-      collectionName: "sessions",
+     collectionName: "sessions",f
     }),
     cookie: {
       secure: process.env.NODE_ENV === "production",
@@ -219,8 +235,7 @@ app.post("/api/analyze-schedule", aiRateLimiter, upload.single("image"), async (
   { "subject": "برمجة 1", "day": "الأحد", "time": "9:00 - 10:30", "type": "حضوري" }
 ]
 `;
-
-    const result = await model.generateContent([prompt, imagePart]);
+const result = await generateWithRetry(model, [prompt, imagePart]);
     const responseText = result.response.text();
 
     // تنظيف الرد من أي رموز Markdown محتملة (```json ... ```)
@@ -262,8 +277,7 @@ app.post("/api/chat", aiRateLimiter, async (req, res) => {
 
 سؤال الطالب: "${message}"
 `;
-
-    const result = await model.generateContent(prompt);
+const result = await generateWithRetry(model, prompt);
     const replyText = result.response.text();
 
     res.json({ success: true, reply: replyText });
