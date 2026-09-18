@@ -108,8 +108,7 @@ function saveContactsState() {
 
 function loadSavedContacts() {
   const saved = loadData("contacts_list", null);
-
-  if (saved === null) {
+  if (!saved || saved.length === 0) {
     // أول مرة — نحمّل القائمة الجاهزة تلقائياً
     contacts = DEFAULT_CONTACTS;
     saveContactsState();

@@ -36,8 +36,31 @@ const CAREER_PATHS = {
     projects: ["قيادة مشروع تخرج بمنهجية Agile", "إدارة فريق طلابي بمشروع تطوعي"],
     courses: ["إدارة مشاريع", "نظم معلومات إدارية", "هندسة برمجيات"],
   },
+  "human-resources": {
+    title: "الموارد البشرية",
+    description: "يدير دورة حياة الموظف بالمؤسسة — من التوظيف والتدريب إلى تقييم الأداء وبناء ثقافة العمل، بالتوازي مع أنظمة تقنية لإدارة الموارد البشرية (HRIS).",
+    skills: ["التوظيف والاستقطاب", "إدارة الأداء", "قوانين العمل", "التخطيط الاستراتيجي للقوى العاملة", "أنظمة HRIS", "مهارات التفاوض"],
+    certs: ["SHRM-CP", "PHRi", "Professional in Human Resources (PHR)"],
+    projects: ["تصميم خطة توظيف كاملة لوظيفة افتراضية", "بناء نظام تقييم أداء لفريق صغير", "دراسة حالة عن ثقافة مؤسسية ناجحة"],
+    courses: ["إدارة الموارد البشرية", "السلوك التنظيمي", "قانون العمل", "إدارة الأداء"],
+  },
+  "multimedia": {
+    title: "الوسائط المتعددة",
+    description: "يصمم وينتج محتوى بصري وسمعي رقمي (فيديو، رسوم متحركة، تصميم جرافيك، صوت) يخدم أغراض تسويقية أو تعليمية أو ترفيهية.",
+    skills: ["التصميم الجرافيكي", "مونتاج الفيديو", "الرسوم المتحركة (2D/3D)", "تصميم الصوت", "سرد القصص البصرية (Storytelling)", "Adobe Creative Suite"],
+    certs: ["Adobe Certified Professional", "Certified Digital Marketing Professional", "Autodesk Certified User"],
+    projects: ["إنتاج فيديو تعريفي قصير (Motion Graphics)", "تصميم هوية بصرية كاملة لمشروع وهمي", "بناء معرض أعمال (Portfolio) رقمي"],
+    courses: ["تصميم جرافيك", "مونتاج ومؤثرات بصرية", "الرسوم المتحركة", "أساسيات التصوير"],
+  },
+  "web-technologies": {
+    title: "تقنيات الويب",
+    description: "يصمم ويبني مواقع وتطبيقات ويب حديثة — من واجهات المستخدم (Front-End) إلى الأنظمة الخلفية (Back-End) وقواعد البيانات، مع التركيز على الأداء والأمان.",
+    skills: ["HTML/CSS/JavaScript", "أطر عمل مثل React أو Vue", "Node.js", "قواعد البيانات (SQL/NoSQL)", "أمن تطبيقات الويب", "استضافة ونشر المواقع"],
+    certs: ["Meta Front-End Developer", "AWS Certified Developer", "freeCodeCamp Full-Stack Certification"],
+    projects: ["بناء موقع شخصي متجاوب (Responsive)", "تطبيق ويب كامل يربط واجهة أمامية بخلفية وقاعدة بيانات", "المساهمة بمشروع ويب مفتوح المصدر"],
+    courses: ["تطوير الويب", "برمجة الواجهات الأمامية", "قواعد بيانات", "أمن المعلومات"],
+  },
 };
-
 document.addEventListener("DOMContentLoaded", () => {
   const careerSelect = document.getElementById("careerSelect");
   if (!careerSelect) return; // نتأكد إننا فعلاً بقسم خريطة المهارات
