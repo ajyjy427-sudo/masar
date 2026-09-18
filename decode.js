@@ -15,6 +15,7 @@ function initUploadZone() {
   const chooseBtn = document.getElementById("chooseImageBtn");
   const removeBtn = document.getElementById("removeImageBtn");
   const analyzeBtn = document.getElementById("analyzeBtn");
+    const enableRemindersBtn = document.getElementById("enableRemindersBtn");
 
   if (!uploadZone) return; // نتأكد إننا فعلاً بقسم فك الجدول
 
@@ -55,6 +56,15 @@ function initUploadZone() {
       analyzeScheduleImage(selectedImageFile);
     }
   });
+  
+  // زر تفعيل التذكيرات
+  if (enableRemindersBtn) {
+    enableRemindersBtn.addEventListener("click", () => {
+      if (window.enableScheduleReminders) {
+        window.enableScheduleReminders();
+      }
+    });
+  }
 }
 
 // ============================================

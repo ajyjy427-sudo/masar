@@ -174,9 +174,9 @@
               <span class="loader"></span>
               <span>جاري تحليل الجدول...</span>
             </div>
-
             <div class="schedule-results" id="scheduleResults" hidden>
               <h3>الجدول المستخرج</h3>
+              <button class="btn-secondary" id="enableRemindersBtn" type="button">🔔 تفعيل تذكيرات المحاضرات</button>
               <table class="schedule-table">
                 <thead>
                   <tr>
@@ -184,6 +184,7 @@
                     <th>اليوم</th>
                     <th>الوقت</th>
                     <th>النوع</th>
+                    <th>القاعة</th>
                   </tr>
                 </thead>
                 <tbody id="scheduleTableBody"></tbody>
@@ -471,6 +472,7 @@
 
   <script src="storage.js" defer></script>
   <script src="decode.js" defer></script>
+  <script src="notifications.js" defer></script>
   <script src="gpa.js" defer></script>
   <script src="absence.js" defer></script>
   <script src="study.js" defer></script>
