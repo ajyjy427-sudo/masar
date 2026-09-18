@@ -51,6 +51,7 @@ const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 const passport = require("passport");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const session = require("express-session");
+const MongoStore = require("connect-mongo");
 
 app.set("trust proxy", 1);
 
@@ -59,13 +60,16 @@ app.use(
     secret: process.env.SESSION_SECRET || "masar_secret_key_123",
     resave: false,
     saveUninitialized: false,
+    store: MongoStore.create({
+      mongoUrl: process.env.MONGODB_URI,
+      collectionName: "sessions",
+    }),
     cookie: {
       secure: process.env.NODE_ENV === "production",
       maxAge: 7 * 24 * 60 * 60 * 1000, // تبقى أسبوع
     },
   })
-);
-app.use(passport.initialize());
+);app.use(passport.initialize());
 app.use(passport.session());
 
 // خلف أي منصة استضافة (Render, Railway...) السيرفر يشتغل خلف بروكسي HTTPS
