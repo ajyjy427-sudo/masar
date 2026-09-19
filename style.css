@@ -21,19 +21,7 @@
   --radius-lg: 16px;
   --shadow-card: 0 2px 10px rgba(11, 61, 46, 0.06);
 }
-[data-theme="dark"] {
-  --white: #1a2420;
-  --bg-soft: #101512;
-  --green-900: #e8f5ee;
-  --green-700: #4fd68c;
-  --green-600: #3fc47a;
-  --green-400: #56b884;
-  --green-100: #1e2d25;
-  --text-dark: #e8f0ea;
-  --text-muted: #9aab9f;
-  --border: #2a3833;
-  --shadow-card: 0 2px 10px rgba(0, 0, 0, 0.25);
-}
+
 
 body {
   transition: background 0.25s ease, color 0.25s ease;
