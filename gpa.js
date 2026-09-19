@@ -22,6 +22,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   document.getElementById("addCourseBtn").addEventListener("click", () => addCourseRow());
   document.getElementById("addWhatifBtn").addEventListener("click", () => addWhatifRow());
+    document.getElementById("saveSemesterBtn").addEventListener("click", saveSemesterToHistory);
   document.getElementById("gpaScale").addEventListener("change", () => {
     saveGpaState();
     calculateGPA();
@@ -219,4 +220,99 @@ function loadSavedCourses() {
   }
 
   calculateGPA();
+    renderGpaHistoryChart();
+}
+// ============================================
+// سجل تطور المعدل عبر الفصول (رسم بياني)
+// ============================================
+
+function saveSemesterToHistory() {
+  const labelInput = document.getElementById("semesterLabelInput");
+  const label = labelInput.value.trim();
+
+  if (!label) {
+    alert("الرجاء إدخال اسم الفصل الدراسي.");
+    return;
+  }
+
+  const currentGpaText = document.getElementById("gpaResult").textContent;
+  const currentGpa = parseFloat(currentGpaText);
+  const scale = document.getElementById("gpaScale").value;
+
+  if (!currentGpa || currentGpa <= 0) {
+    alert("احسب معدلك أول (زر احسب المعدل) قبل ما تحفظ الفصل.");
+    return;
+  }
+
+  const history = loadData("gpa_history", []);
+  history.push({ label, gpa: currentGpa, scale, date: new Date().toISOString() });
+  saveData("gpa_history", history);
+
+  labelInput.value = "";
+  renderGpaHistoryChart();
+}
+
+let gpaChartInstance = null;
+
+function renderGpaHistoryChart() {
+  const canvas = document.getElementById("gpaHistoryChart");
+  const emptyState = document.getElementById("gpaHistoryEmpty");
+  if (!canvas) return;
+
+  const history = loadData("gpa_history", []);
+
+  if (history.length === 0) {
+    canvas.hidden = true;
+    if (emptyState) emptyState.hidden = false;
+    return;
+  }
+
+  canvas.hidden = false;
+  if (emptyState) emptyState.hidden = true;
+
+  const labels = history.map((h) => h.label);
+  const percentages = history.map((h) => {
+    const maxScale = h.scale === "4" ? 4 : 5;
+    return Math.round((h.gpa / maxScale) * 100);
+  });
+
+  if (gpaChartInstance) {
+    gpaChartInstance.destroy();
+  }
+
+  gpaChartInstance = new Chart(canvas, {
+    type: "line",
+    data: {
+      labels,
+      datasets: [
+        {
+          label: "المعدل (%)",
+          data: percentages,
+          borderColor: "#1f8a55",
+          backgroundColor: "rgba(31, 138, 85, 0.15)",
+          tension: 0.3,
+          fill: true,
+          pointRadius: 5,
+          pointBackgroundColor: "#146c43",
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      scales: {
+        y: { min: 0, max: 100, ticks: { callback: (v) => v + "%" } },
+      },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: (ctx) => {
+              const h = history[ctx.dataIndex];
+              return `المعدل: ${h.gpa} (من ${h.scale === "4" ? "4" : "5"})`;
+            },
+          },
+        },
+      },
+    },
+  });
 }

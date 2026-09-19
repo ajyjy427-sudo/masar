@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700;800&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap" rel="stylesheet">
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -108,6 +109,7 @@
       <header class="topbar">
         <button class="sidebar-toggle" id="sidebarToggle" aria-label="فتح القائمة">☰</button>
         <h1 class="page-title" id="pageTitle">الرئيسية</h1>
+                <button class="btn-secondary" id="themeToggleBtn" title="تبديل الوضع الليلي">🌙</button>
         <div class="topbar-user" id="topbarUser">
           <button class="btn-secondary" id="loginBtn">تسجيل الدخول بـ Google</button>
         </div>
@@ -260,6 +262,16 @@
             </div>
 
           </div>
+                      <div class="gpa-history-section">
+              <h3>📈 تطور المعدل عبر الفصول</h3>
+              <div class="gpa-history-form">
+                <input type="text" id="semesterLabelInput" placeholder="اسم الفصل (مثال: الفصل الأول 1447)">
+                <button class="btn-primary" id="saveSemesterBtn" type="button">حفظ نتيجة هذا الفصل</button>
+              </div>
+              <canvas id="gpaHistoryChart" height="90"></canvas>
+              <p class="empty-state" id="gpaHistoryEmpty">لسه ما فيه فصول محفوظة — احسب معدلك واضغط "حفظ نتيجة هذا الفصل".</p>
+            </div>
+        </section>
         </section>
 
         <!-- ---------- 3. عداد الحرمان ---------- -->
@@ -470,7 +482,8 @@
     </div>
   </div>
 
-  <script src="storage.js" defer></script>
+    <script src="theme.js"></script>
+  <script src="storage.js" defer></script>  
   <script src="decode.js" defer></script>
   <script src="notifications.js" defer></script>
   <script src="gpa.js" defer></script>
