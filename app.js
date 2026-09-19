@@ -124,20 +124,20 @@ function getDashboardGpa() {
 
 function getDashboardAttendance() {
   const subjects = loadData("absence_subjects", []);
-  let totalSessions = 0;
-  let attendedSessions = 0;
+  let totalAllowed = 0;
+  let totalRemaining = 0;
 
   subjects.forEach((subject) => {
-    const total = parseFloat(subject.total) || 0;
+    const max = parseFloat(subject.max) || 0;
     const missed = parseFloat(subject.missed) || 0;
-    if (total > 0) {
-      totalSessions += total;
-      attendedSessions += Math.max(0, total - missed);
+    if (max > 0) {
+      totalAllowed += max;
+      totalRemaining += Math.max(0, max - missed);
     }
   });
 
-  if (totalSessions <= 0) return "—";
-  return `${Math.round((attendedSessions / totalSessions) * 100)}%`;
+  if (totalAllowed <= 0) return "—";
+  return `${totalRemaining} من ${totalAllowed}`;
 }
 
 function getDashboardUpcomingTasks() {

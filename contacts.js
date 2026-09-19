@@ -6,9 +6,9 @@
 // قائمة جاهزة مسبقاً — تُحمّل تلقائياً أول مرة بس
 const DEFAULT_CONTACTS = [
   { name: "أ. لمياء الزعاقي", subject: "", email: "lamia1417" },
-  { name: "أ. حذره الصبيري", subject: "", email: "hwfg3" },
+  { name: "أ. حذره الصيعري", subject: "", email: "hwfg3" },
   { name: "أ. أمجاد البقمي", subject: "", email: "am00455" },
-  { name: "أ. ملاك الفحطاني", subject: "", email: "malakfal9" },
+  { name: "أ. ملاك القحطاني", subject: "", email: "malakfal9" },
   { name: "أ. أحلام الزهراني", subject: "", email: "a1a4a1a4a" },
   { name: "أ. أسماء الدوسري", subject: "", email: "aalbayaa" },
   { name: "أ. عروب الزامل", subject: "", email: "arub_s" },

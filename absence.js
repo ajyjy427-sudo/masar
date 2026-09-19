@@ -1,6 +1,6 @@
 // ============================================
 // مسار — absence.js
-// عداد الحرمان (مع الحفظ التلقائي)
+// عداد الحرمان (بنظام "الحد الأقصى المسموح" مباشرة)
 // ============================================
 
 let absenceRowCount = 0;
@@ -23,10 +23,9 @@ function addAbsenceRow(savedValues = null) {
   const row = document.createElement("tr");
   row.id = rowId;
   row.innerHTML = `
-    <td><input type="text" class="absence-name" placeholder="مثال: قواعد بيانات"></td>
-    <td><input type="number" class="absence-total" min="1" placeholder="مثال: 30"></td>
-    <td><input type="number" class="absence-missed" min="0" placeholder="مثال: 4"></td>
-    <td><input type="number" class="absence-percent" min="1" max="100" value="25"></td>
+    <td><input type="text" class="absence-name" placeholder="مثال: الحاسب"></td>
+    <td><input type="number" class="absence-max" min="1" placeholder="مثال: 3"></td>
+    <td><input type="number" class="absence-missed" min="0" placeholder="مثال: 1"></td>
     <td class="absence-status-cell"><span class="status-badge status-green"><span class="status-dot"></span> أدخل البيانات</span></td>
     <td><button class="remove-row-btn" type="button">✕</button></td>
   `;
@@ -35,9 +34,8 @@ function addAbsenceRow(savedValues = null) {
 
   if (savedValues) {
     row.querySelector(".absence-name").value = savedValues.name || "";
-    row.querySelector(".absence-total").value = savedValues.total || "";
+    row.querySelector(".absence-max").value = savedValues.max || "";
     row.querySelector(".absence-missed").value = savedValues.missed || "";
-    row.querySelector(".absence-percent").value = savedValues.percent || 25;
   }
 
   const inputs = row.querySelectorAll("input");
@@ -57,30 +55,27 @@ function addAbsenceRow(savedValues = null) {
 }
 
 function updateRowStatus(row) {
-  const total = parseFloat(row.querySelector(".absence-total").value) || 0;
+  const max = parseFloat(row.querySelector(".absence-max").value) || 0;
   const missed = parseFloat(row.querySelector(".absence-missed").value) || 0;
-  const allowedPercent = parseFloat(row.querySelector(".absence-percent").value) || 25;
 
   const statusCell = row.querySelector(".absence-status-cell");
 
-  if (total <= 0) {
+  if (max <= 0) {
     statusCell.innerHTML = `<span class="status-badge status-green"><span class="status-dot"></span> أدخل البيانات</span>`;
     return;
   }
 
-  const maxAllowedAbsences = Math.floor((allowedPercent / 100) * total);
-  const remaining = maxAllowedAbsences - missed;
-  const usedPercent = (missed / total) * 100;
+  const remaining = max - missed;
 
   let statusClass = "status-green";
   let statusText = `بأمان — باقي لك ${remaining} غياب`;
 
-  if (missed >= maxAllowedAbsences) {
+  if (missed >= max) {
     statusClass = "status-red";
-    statusText = `تجاوزت الحد المسموح! (${missed} من ${maxAllowedAbsences})`;
-  } else if (usedPercent >= allowedPercent * 0.75) {
+    statusText = `تجاوزت الحد المسموح! (${missed} من ${max})`;
+  } else if (remaining <= 1) {
     statusClass = "status-yellow";
-    statusText = `اقتربت من الحد — باقي لك ${remaining} غياب فقط`;
+    statusText = `اقتربت من الحد — باقي لك ${remaining} فقط`;
   }
 
   statusCell.innerHTML = `<span class="status-badge ${statusClass}"><span class="status-dot"></span> ${statusText}</span>`;
@@ -94,9 +89,8 @@ function saveAbsenceState() {
   const rows = document.querySelectorAll("#absenceTableBody tr");
   const subjects = Array.from(rows).map((row) => ({
     name: row.querySelector(".absence-name").value,
-    total: row.querySelector(".absence-total").value,
+    max: row.querySelector(".absence-max").value,
     missed: row.querySelector(".absence-missed").value,
-    percent: row.querySelector(".absence-percent").value,
   }));
 
   saveData("absence_subjects", subjects);
