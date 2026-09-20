@@ -16,7 +16,7 @@ const DEFAULT_CONTACTS = [
   { name: "أ. أسماء العنزي", subject: "", email: "asma_a6" },
   { name: "أ. نوره الشدوخي", subject: "", email: "Nalshedokhi" },
   { name: "أ. ريم الخميس", subject: "", email: "reem_kh1" },
-  { name: "أ. كادي الكريديس", subject: "", email: "halaa1" },
+  { name: "أ. هلا الكريديس", subject: "", email: "halaa1" },
   { name: "أ. ضياء الزهراني", subject: "", email: "d_zh1" },
   { name: "أ. أسماء الغامدي", subject: "", email: "asma_alghamdi1418" },
   { name: "أ. نجود السالمي", subject: "", email: "nojood22" },
