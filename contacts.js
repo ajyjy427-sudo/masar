@@ -25,8 +25,7 @@ const DEFAULT_CONTACTS = [
   { name: "أ. أماني المطلق", subject: "", email: "Amani_Nasser" },
   { name: "أ. منال العمري", subject: "", email: "Ma_12200" },
   { name: "عميدة الكلية — أ. نوره العتيببي", subject: "بريد إلكتروني", email: "n.alotaibi2@tvtc.gov.sa" },
-
-  ];
+];
 
 const CONTACTS_VERSION = 2; // كل ما تعدّل DEFAULT_CONTACTS بالمستقبل، ارفع هذا الرقم بواحد
 
