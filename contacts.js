@@ -25,7 +25,10 @@ const DEFAULT_CONTACTS = [
   { name: "أ. أماني المطلق", subject: "", email: "Amani_Nasser" },
   { name: "أ. منال العمري", subject: "", email: "Ma_12200" },
   { name: "عميدة الكلية — أ. نوره العتيببي", subject: "بريد إلكتروني", email: "n.alotaibi2@tvtc.gov.sa" },
-];
+
+  ];
+
+const CONTACTS_VERSION = 2; // كل ما تعدّل DEFAULT_CONTACTS بالمستقبل، ارفع هذا الرقم بواحد
 
 let contacts = [];
 
@@ -108,10 +111,13 @@ function saveContactsState() {
 
 function loadSavedContacts() {
   const saved = loadData("contacts_list", null);
-  if (!saved || saved.length === 0) {
-    // أول مرة — نحمّل القائمة الجاهزة تلقائياً
+  const savedVersion = loadData("contacts_version", 0);
+
+  if (!saved || saved.length === 0 || savedVersion < CONTACTS_VERSION) {
+    // أول مرة، أو صار تحديث جديد على القائمة الافتراضية بالكود
     contacts = DEFAULT_CONTACTS;
     saveContactsState();
+    saveData("contacts_version", CONTACTS_VERSION);
   } else {
     contacts = saved;
   }
